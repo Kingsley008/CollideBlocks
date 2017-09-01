@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>game1</title>
+    <style>
+        #myCanvas {
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="300">
+
+</canvas><br>
+<input type="range" id="myRange" value="50">
+<p>ad 控制:左右； f:发射；  1 2 3：控制关卡；  p:暂停（暂停可以拖动球）
+</p>
+<p> bug: 并没有判断反弹X</p>
+
+</body>
+<script src="js/utils.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/guagame.js"></script>
+<script src="js/ball.js"></script>
+<script src="js/blocks.js"></script>
+<script src="js/paddle.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/scence_end.js"></script>
+<script>
+    //定义
+    var blocks = [];
+    var loadLevel = function (n,game) {
+        n = n -1;
+        var blocks = [];
+        var level = levels[n];
+        for(var i = 0; i <level.length; i++){
+            var p = level[i];
+            var b = Block(p,game);
+            blocks.push(b);
+        }
+        return blocks;
+    }
+
+    var _main = function () {
+        var images = {
+            ball:'imgs/ball.png',
+            paddle:'imgs/block.png',
+            blocks:'imgs/blocks.png'
+        }
+        var game = GuaGame(images, function (game) {
+            var s = Stage(game);
+            game.stage = s;
+        });
+       // var s = Stage(game);
+
+/*        var game = GuaGame(images, function (game) {
+            // 默认第一关
+
+            //待用
+            game.update = function () {
+                s.update();
+            };
+            //绘画
+            game.draw = function () {
+                s.draw();
+            }
+
+
+
+        });*/
+        var enableDebugMode = function (enable,game) {
+            if(!enable){
+                return
+            }
+            //暂停
+            window.addEventListener('keydown', function (event) {
+                var k = event.key;
+                if (k === 'p') {
+                    game.paused = !game.paused;
+                } else if ( '1234567'.includes(k)) {
+                    blocks = loadLevel(Number(k),game);
+                }
+            }  );
+
+        }
+        enableDebugMode(true,game);
+
+
+    };
+    _main();
+
+</script>
+</html>
