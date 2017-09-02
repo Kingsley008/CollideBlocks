@@ -44,12 +44,11 @@ class GuaGame {
             img.onload = (function (name, img) {
 
                 return function () {
-                    log(names);
+
                     g.images[name] = img;
                     // 所有图片载入后 调用run
                     loads.push(1);
                     // 判断是否全部加载完成
-                    log(g.images);
                     if (loads.length === names.length) {
                         // 图片加载完成后 开始执行程序
                         g.run();
