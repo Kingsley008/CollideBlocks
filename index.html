@@ -35,8 +35,8 @@
 <!-- 关卡数据 -->
 <script src="js/levels.js"></script>
 <script>
-    //定义
     var blocks = [];
+
     var loadLevel = function (n,game) {
         n = n -1;
         var blocks = [];
@@ -49,13 +49,21 @@
         return blocks;
     };
 
+    var range = document.getElementById('myRange');
+    var fps = range.getAttribute('value');
+    // fps 绑定 range
+    range.addEventListener('input', function (e) {
+        fps = e.target.value;
+    });
+
+
     var _main = function () {
         var images = {
             ball:'imgs/ball.png',
             paddle:'imgs/block.png',
             blocks:'imgs/blocks.png'
         };
-        var game = GuaGame(images, function (game) {
+        var game = GuaGame.instance(50,images, function (game) {
             var s = new ScenceTitle(game);
             game.stage = s;
         });

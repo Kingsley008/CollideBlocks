@@ -2,6 +2,7 @@
 function Block(position,game) {
     //position [0, 0, lives] 格式
     var p = position;
+
     var aInb = function (x, x1, x2) {
         return x >= x1 && x <= x2;
     };
@@ -20,8 +21,9 @@ function Block(position,game) {
     o.react = function (ball) {
         ball.y *= -1;
     }
+
     o.collide = function (ball) {
-        // 判断相交
+        // 判断两个矩形相交
         var self = o;
         if(aInb(ball.x, self.x, self.x + self.w )||aInb(self.x, ball.x, ball.x  + ball.w)){
             if(aInb(ball.y, self.y, self.y + self.h )||aInb(self.y, ball.y, ball.y + ball.h)){
@@ -30,5 +32,7 @@ function Block(position,game) {
         }
         return false;
     };
+
+
     return o;
 }

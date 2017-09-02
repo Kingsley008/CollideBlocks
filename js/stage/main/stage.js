@@ -1,7 +1,6 @@
 var Stage = function (game) {
     var s = {
         game:game,
-
     };
     // 初始化
     var paddle = Paddle(game);
@@ -69,7 +68,7 @@ var Stage = function (game) {
     };
     // mouse event
     var canMove = false;
-    game.canvas.addEventListener('mousedown',function (e) {
+    game.myCanvas.addEventListener('mousedown',function (e) {
         var x = e.offsetX;
         var y = e.offsetY;
 
@@ -91,8 +90,8 @@ var Stage = function (game) {
         game.drawImage(ball);
 
     }
-    game.canvas.addEventListener('mousemove',move);
-    game.canvas.addEventListener('mouseup', function (e) {
+    game.myCanvas.addEventListener('mousemove',move);
+    game.myCanvas.addEventListener('mouseup', function (e) {
         canMove = false;
     });
 
