@@ -63,7 +63,7 @@ var Stage = function (game) {
         //判断游戏结束
         if(ball.y > paddle.y ){
             // 跳转到游戏结束的场景
-            var end = endScence(game);
+            var end = new ScenceEnd(game);
             game.replaceStage(end);
         }
     };
