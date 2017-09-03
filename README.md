@@ -95,3 +95,22 @@
     // 1. 将场景逻辑抽离游戏逻辑 使用异步回调的方式给场景注入game; 再在game中注入stage
     // 2. 在game用使用代理的方式进行场景的更新，重绘
 ```
+6. 判断矩形相交的判断（AinB, BinA ）
+
+```jsx harmony
+    var aInb = function (x, x1, x2) {
+        return x >= x1 && x <= x2;
+    };
+
+    var collide = function (ball) {
+        // 判断两个矩形相交
+        var self = o;
+        if(aInb(ball.x, self.x, self.x + self.w )||aInb(self.x, ball.x, ball.x  + ball.w)){
+            if(aInb(ball.y, self.y, self.y + self.h )||aInb(self.y, ball.y, ball.y + ball.h)){
+                return true
+            }
+        }
+        return false;
+    };
+
+```

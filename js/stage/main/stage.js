@@ -1,12 +1,12 @@
 var Stage = function (game) {
     var s = {
-        game:game,
+        game: game,
     };
     // 初始化
     var paddle = Paddle(game);
     var ball = Ball(game);
     var score = 0;
-    blocks = loadLevel(1,game);
+    blocks = loadLevel(1, game);
 
     //event 事件注册+自动判断调用
     game.registerAction('a', function () {
@@ -20,14 +20,14 @@ var Stage = function (game) {
         ball.fire();
     });
 
-    s.draw  = function () {
-        game.ctx.clearRect(0,0,400,300);
-/*        game.ctx.fillStyle = "#123";
-        game.ctx.fillRect(0, 0, 400, 300)*/
+    s.draw = function () {
+        game.ctx.clearRect(0, 0, 400, 300);
+        /*        game.ctx.fillStyle = "#123";
+                game.ctx.fillRect(0, 0, 400, 300)*/
         game.drawImage(paddle);
         game.drawImage(ball);
         blocks.forEach(function (block) {
-            if(block.alive){
+            if (block.alive) {
                 game.drawImage(block);
             }
         });
@@ -36,18 +36,18 @@ var Stage = function (game) {
     };
 
     s.update = function () {
-        if(game.paused){
+        if (game.paused) {
             return
         }
         ball.move();
         // 判断blocks相撞
         blocks.forEach(function (block) {
             // 修复 bug： 死亡 直接return
-            if(!block.alive){
+            if (!block.alive) {
                 return
             }
-            if( block.collide(ball)){
-                block.lives-- ;
+            if (block.collide(ball)) {
+                block.lives--;
                 block.kill();
                 //反弹
                 ball.reflect();
@@ -60,7 +60,7 @@ var Stage = function (game) {
             ball.reflect();
         }
         //判断游戏结束
-        if(ball.y > paddle.y ){
+        if (ball.y > paddle.y) {
             // 跳转到游戏结束的场景
             var end = new ScenceEnd(game);
             game.replaceStage(end);
@@ -68,21 +68,21 @@ var Stage = function (game) {
     };
     // mouse event
     var canMove = false;
-    game.myCanvas.addEventListener('mousedown',function (e) {
+    game.myCanvas.addEventListener('mousedown', function (e) {
         var x = e.offsetX;
         var y = e.offsetY;
 
         //判断是否点击到了球 100 200
-        log(x,y);
-        log(ball.hasPoint(x,y));
-        if(ball.hasPoint(x,y)){
+        log(x, y);
+        log(ball.hasPoint(x, y));
+        if (ball.hasPoint(x, y)) {
             canMove = true;
             log('click');
         }
     });
 
-    var move =  function (e) {
-        if(!canMove || !game.paused){
+    var move = function (e) {
+        if (!canMove || !game.paused) {
             return
         }
         ball.x = e.offsetX - 20;
@@ -90,7 +90,7 @@ var Stage = function (game) {
         game.drawImage(ball);
 
     }
-    game.myCanvas.addEventListener('mousemove',move);
+    game.myCanvas.addEventListener('mousemove', move);
     game.myCanvas.addEventListener('mouseup', function (e) {
         canMove = false;
     });

@@ -12,7 +12,7 @@ class GuaScence {
     }
 
     draw() {
-      //  alert('一定要继承这个函数')
+        //  alert('一定要继承这个函数')
     }
 
     update() {

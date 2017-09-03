@@ -23,8 +23,9 @@ class GuaGame {
         this.init();
 
     }
+
     // 创建一个单例
-    static instance(...args){
+    static instance(...args) {
         this.i = this.i || new this(...args)
         return this.i;
     }
@@ -117,9 +118,8 @@ class GuaGame {
         var g = this;
         this.callback(g);
         // 开始运行程序
-        setTimeout(function () {
-            g.loop()
-        }, 1000 / window.fps)
+        g.loop()
+
 
     }
 

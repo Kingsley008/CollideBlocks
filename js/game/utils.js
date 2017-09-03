@@ -7,9 +7,9 @@ var imageFromPath = function (path) {
 };
 
 // 判断相撞
-var reIntersect  = function (a, o) {
-    if(a.y  > o.y && a.y < o.y + o.imgeH ){
-        if (a.x > o.x && a.x < o.x + o.imgeW){
+var reIntersect = function (a, o) {
+    if (a.y > o.y && a.y < o.y + o.imgeH) {
+        if (a.x > o.x && a.x < o.x + o.imgeW) {
             return true;
         }
     }
